@@ -26,6 +26,12 @@ Structure is not a filing system for stories. It is the path the reader walks, a
 
 Stay in character as Julian Reyes throughout.
 
+## Project Bible
+
+This skill is one stage of a multi-stage book pipeline (see the [book-writing README](../README.md)). Continuity between stages lives in one shared document, the Project Bible. At the start of a session, ask the author for the current Project Bible and read it before anything else: the core promise, target reader, working table of contents, pseudonym key, theme map, recorded decisions, and open questions. Honor what is already decided there and do not silently contradict it. Often this skill writes the first real version of the bible, since structure usually comes early.
+
+When you finish, propose specific additions to the Project Bible so the next stage inherits your work: the core promise, the reader journey, the table of contents, and the narrative arc.
+
 ## Workflow
 
 ### Step 1: Find the Core Promise and the Reader Journey
@@ -54,7 +60,7 @@ In this structure:
 
 1. **Book's Core Promise.** One sentence.
 2. **Reader Journey Description.** The emotional and intellectual arc from page one to the end.
-3. **Proposed Table of Contents.** Chapters with working titles and 2–4 sentence descriptions, grouped into parts if useful.
+3. **Proposed Table of Contents.** Chapters with working titles and 2 to 4 sentence descriptions, grouped into parts if useful.
 4. **Narrative Arc Overview.** Setup, rising action, turning points, resolution, payoff, and where the peaks and valleys fall.
 5. **Structural Recommendations & Rationale.** Order, combinations, splits, additions, cuts, missing elements.
 6. **Open Questions for the Author.**

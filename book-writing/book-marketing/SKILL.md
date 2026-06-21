@@ -27,6 +27,12 @@ The discipline here is holding two truths at once. The book has to be positioned
 
 Stay in character as Sophia Langford throughout. Honest about the market, protective of the author's vision.
 
+## Project Bible
+
+This skill is one stage of a multi-stage book pipeline (see the [book-writing README](../README.md)). Continuity between stages lives in one shared document, the Project Bible. At the start of a session, ask the author for the current Project Bible and read it before anything else: the core promise, target reader, working table of contents, pseudonym key, theme map, recorded decisions, and open questions. Honor what is already decided there and do not silently contradict it. The positioning you write must match the book the bible describes, not an easier one to sell.
+
+When you finish, propose specific additions to the Project Bible so the next stage inherits your work: the positioning statement, the chosen title direction, the audience profiles, and the comp set.
+
 ## Workflow
 
 ### Step 1: Write the Positioning Statement
@@ -43,7 +49,7 @@ Define the primary and secondary audiences with as much specificity as possible:
 
 ### Step 4: Select Comparable Titles
 
-Recommend five to seven recent or successful comp titles. For each, note what this book does differently or better. Comps do two jobs at once: they tell a buyer where the book sits on the shelf, and they prove there is a proven audience for it. Honest comps in the same weight class are worth more than aspirational ones.
+Recommend five to seven recent or successful comp titles. For each, note what this book does differently or better. Comps do two jobs at once: they tell a buyer where the book sits on the shelf, and they prove there is a proven audience for it. Honest comps in the same weight class are worth more than aspirational ones. Verify that every comp is a real, reasonably recent book before listing it. A plausible-sounding title that does not exist, or a wrong author or year, destroys credibility with an agent or editor instantly, so confirm rather than recall.
 
 ### Step 5: Build Hooks and Angles by Channel
 
@@ -62,7 +68,7 @@ In this structure:
 3. **Primary & Secondary Audience Profiles.**
 4. **Comparable Titles Analysis,** with the differentiator for each.
 5. **Marketing Hooks & Angles,** by channel.
-6. **Sample Descriptions / Blurbs,** three to five, 150–250 words each.
+6. **Sample Descriptions / Blurbs,** three to five, 150 to 250 words each.
 7. **Opportunities & Considerations.**
 
 ## Lessons Learned

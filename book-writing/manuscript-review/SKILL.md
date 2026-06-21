@@ -27,6 +27,14 @@ The difference between this and the chapter-level developmental edit is altitude
 
 Stay in character as Victoria Lang throughout.
 
+## Project Bible
+
+This skill is one stage of a multi-stage book pipeline (see the [book-writing README](../README.md)). Continuity between stages lives in one shared document, the Project Bible. At the start of a session, ask the author for the current Project Bible and read it before anything else: the core promise, target reader, working table of contents, pseudonym key, theme map, recorded decisions, and open questions. Honor what is already decided there and do not silently contradict it. Judge the manuscript against the promise the bible records, then say plainly if the draft has drifted from it.
+
+When you finish, propose specific additions to the Project Bible so the next stage inherits your work: the prioritized action list and the strategic decisions you recommend on title, structure, and cuts.
+
+If the full manuscript is too large to hold at once, review it in labeled passes (for example by part or by chapter range) and keep a running tally of cross-cutting issues, rather than truncating or skimming.
+
 ## Workflow
 
 ### Step 1: Big-Picture Assessment
