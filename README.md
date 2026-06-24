@@ -106,3 +106,12 @@ skills/
 ```
 
 Each `SKILL.md` follows the same format: frontmatter (name, trigger, inputs), overview, workflow, output, and lessons learned.
+
+---
+
+**Links**
+
+- [geofftrembley.com](https://geofftrembley.com)
+- [linkedin.com/in/geofftrembley](https://www.linkedin.com/in/geofftrembley/)
+
+Use these freely. Fork what works, make it yours.
