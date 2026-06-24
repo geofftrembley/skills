@@ -22,7 +22,7 @@ inputs:
     type: string
     required: false
   - name: context
-    description: "Any additional background — deal stage, prior friction, open issues"
+    description: "Any additional background: deal stage, prior friction, open issues"
     type: string
     required: false
 tools: [slack_search, calendar_read, kg_read, memory_read]
@@ -32,7 +32,7 @@ tools: [slack_search, calendar_read, kg_read, memory_read]
 
 ## Overview
 
-This skill builds a one-page brief for any meeting, in under 5 minutes. It pulls context on who's in the room, surfaces relevant history from Slack and memory, sharpens your objective, and flags the landmines — things that could derail the meeting if you walk in without knowing about them.
+This skill builds a one-page brief for any meeting, in under 5 minutes. It pulls context on who's in the room, surfaces relevant history from Slack and memory, sharpens your objective, and flags the landmines: things that could derail the meeting if you walk in without knowing about them.
 
 The output is not a summary of everything that's happened. It's a tight prep document that answers four questions: who are these people, what do they care about, what do I need from this meeting, and what could blow it up.
 
@@ -50,7 +50,7 @@ Identify the decision-maker, the skeptic, and any silent stakeholders whose buy-
 ### Step 2: Surface Relevant History
 
 Search Slack and memory for prior context on this meeting's topic:
-- Last time this topic came up — what was decided, what was deferred
+- Last time this topic came up: what was decided, what was deferred
 - Any commitments made in prior meetings that are still open
 - Recent friction points or unresolved disagreements
 - Competitive signals relevant to this conversation
@@ -83,7 +83,7 @@ Produce a one-page prep document in the following structure. Prose paragraphs, n
 ## Output Format
 
 ```
-**Pre-Meeting Brief: {{meeting_title}} — [Date/Time]**
+**Pre-Meeting Brief: {{meeting_title}}, [Date/Time]**
 
 **The Room**: Who's attending and what each person cares about. Flag the 
 decision-maker and note any attendee whose posture is unclear or likely 
@@ -96,7 +96,7 @@ is a first meeting, say so and note what they likely know about you.
 objective if primary isn't achievable. How you'll know you got it.
 
 **Landmines**: What could blow this up. Specific, not generic. If there's 
-nothing that could derail this meeting, note that — it means the meeting is 
+nothing that could derail this meeting, note that. It means the meeting is 
 low-stakes.
 
 **The One Thing**: If you only have 30 seconds to remember one thing going 
@@ -121,7 +121,7 @@ into this room, it's this.
 ### Common Failures
 
 - **No history available**: For first meetings or new topics, Slack and memory may have nothing. In that case, focus entirely on the objective and attendee context. Note explicitly that this is a cold start.
-- **Meeting purpose is unclear from the title**: Calendar invites often have meaningless titles ("Sync", "Check-in", "Follow-up"). Use attendee context and `{{context}}` input to infer purpose. If it's still unclear, flag it — walking into a meeting without knowing why it's happening is a preparation failure you can avoid.
+- **Meeting purpose is unclear from the title**: Calendar invites often have meaningless titles ("Sync", "Check-in", "Follow-up"). Use attendee context and `{{context}}` input to infer purpose. If it's still unclear, flag it. Walking into a meeting without knowing why it's happening is a preparation failure you can avoid.
 
 ### When to Ask the User
 

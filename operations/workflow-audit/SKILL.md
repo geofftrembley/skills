@@ -53,9 +53,9 @@ If zero user conversations are found, skip to Step 6 and publish a brief "No act
 - **Output**: Full message history for each conversation
 
 For each user-facing conversation, load up to 20 messages. Focus attention on:
-- Messages containing task failure/completion status — these indicate background task outcomes
-- Assistant messages with tool calls — these show what tools were used
-- User messages with decision responses — these show user choices and corrections
+- Messages containing task failure/completion status: these indicate background task outcomes
+- Assistant messages with tool calls: these show what tools were used
+- User messages with decision responses: these show user choices and corrections
 - User messages that suggest something went wrong ("that's off", "try again", "status")
 
 ### Step 3: Inspect Session Workspaces
@@ -66,8 +66,8 @@ For each user-facing conversation, load up to 20 messages. Focus attention on:
 - **Output**: Artifact inventory, tool output files, failed task logs
 
 For each active session, list files in:
-- `workspace/artifacts/` — generated deliverables
-- `workspace/tools/` — tool call outputs
+- `workspace/artifacts/`: generated deliverables
+- `workspace/tools/`: tool call outputs
 
 Read key files like task inspection outputs and task start results to understand what background work was attempted and whether it succeeded.
 
@@ -75,7 +75,7 @@ Read key files like task inspection outputs and task start results to understand
 
 - **Mode**: `agentic`
 - **Tool**: `run_python`
-- **Input**: All conversation context and workspace data from Steps 2–3
+- **Input**: All conversation context and workspace data from Steps 2-3
 - **Output**: Structured findings across 5 categories
 
 Analyze across these dimensions:
@@ -94,14 +94,14 @@ Analyze across these dimensions:
 
 - **Mode**: `agentic`
 - **Input**: Raw findings from Step 4
-- **Output**: Efficiency score (1–10), ranked top 3 optimizations, memory suggestions
+- **Output**: Efficiency score (1-10), ranked top 3 optimizations, memory suggestions
 
 Scoring rubric:
-- 9–10: No failures, minimal back-and-forth, all tasks completed first-try
-- 7–8: Minor inefficiencies but no failures, good recovery
-- 5–6: Failures occurred but recovered, some avoidable issues
-- 3–4: Multiple failures, significant user frustration, repeated anti-patterns
-- 1–2: Critical failures, data loss, or fundamentally broken workflows
+- 9-10: No failures, minimal back-and-forth, all tasks completed first-try
+- 7-8: Minor inefficiencies but no failures, good recovery
+- 5-6: Failures occurred but recovered, some avoidable issues
+- 3-4: Multiple failures, significant user frustration, repeated anti-patterns
+- 1-2: Critical failures, data loss, or fundamentally broken workflows
 
 Rank optimizations by: (impact on user time saved) × (likelihood of recurrence)
 
@@ -117,7 +117,7 @@ Publish with `importance="important"` for normal reports (issues found) or `impo
 The feed item must include:
 - `html_content`: A styled HTML report with sections for Executive Summary, Issues, Score, Top 3 Optimizations, Insights, and Memory Suggestions
 - `choices`: Action buttons for the most impactful follow-ups (e.g., "Save X to memory", "View full report")
-- `summary`: 1–2 sentence markdown summary with bold key metrics
+- `summary`: 1-2 sentence markdown summary with bold key metrics
 - `title`: "Workflow Review: [date range]"
 - `event_type`: "workflow_review"
 
@@ -125,38 +125,38 @@ The feed item must include:
 
 A structured activity feed card containing:
 
-1. **Executive Summary** — 2–3 sentence overview of the day's workflow health
-2. **Issues Found** — Specific problems with context (which conversation, what went wrong)
-3. **Efficiency Score** — 1–10 rating with justification
-4. **Top 3 Optimizations** — Actionable recommendations ranked by impact
-5. **Insights & Patterns** — Cross-cutting observations
-6. **Suggested Memory Updates** — Facts or strategies to remember
-7. **Action buttons** — Clickable CTAs for the highest-impact follow-ups
+1. **Executive Summary**: 2-3 sentence overview of the day's workflow health
+2. **Issues Found**: Specific problems with context (which conversation, what went wrong)
+3. **Efficiency Score**: 1-10 rating with justification
+4. **Top 3 Optimizations**: Actionable recommendations ranked by impact
+5. **Insights & Patterns**: Cross-cutting observations
+6. **Suggested Memory Updates**: Facts or strategies to remember
+7. **Action buttons**: Clickable CTAs for the highest-impact follow-ups
 
 ## Lessons Learned
 
 ### Do
 
-- Query both user-facing sessions AND background tasks — the background task list reveals automation health and whether scheduled agents are running on cadence.
-- Read tool output files in session workspaces — these contain the ground truth of what happened, not just the conversation narrative.
-- Look for user correction language as signals: "that feels off", "try again", "status", explicit number corrections — these indicate the assistant made wrong assumptions.
+- Query both user-facing sessions AND background tasks. The background task list reveals automation health and whether scheduled agents are running on cadence.
+- Read tool output files in session workspaces. These contain the ground truth of what happened, not just the conversation narrative.
+- Look for user correction language as signals: "that feels off", "try again", "status", explicit number corrections. These indicate the assistant made wrong assumptions.
 - Check file sizes of generated artifacts to confirm they were actually created successfully (not empty/partial).
-- Cite specific session IDs (shortened) and exact quotes when reporting issues — vague findings aren't actionable.
+- Cite specific session IDs (shortened) and exact quotes when reporting issues. Vague findings aren't actionable.
 
 ### Don't
 
-- Don't report on scheduled or background sessions as if they're user conversations — they're automation infrastructure.
-- Don't count "conversation opened but no messages" as an issue — users open and close sessions.
-- Don't penalize for connector authentication flows requiring user action — that's expected UX.
+- Don't report on scheduled or background sessions as if they're user conversations. They’re automation infrastructure.
+- Don't count "conversation opened but no messages" as an issue. Users open and close sessions.
+- Don't penalize for connector authentication flows requiring user action. That’s expected UX.
 - Don't recommend "save to memory" for things already in memory (check learned context first).
-- Don't fabricate issues to fill the report — a clean day is a valid finding.
+- Don't fabricate issues to fill the report. A clean day is a valid finding.
 
 ### Common Failures
 
-- Some conversation tools require dependency skills to be loaded first — always check prerequisites.
-- Some sessions have zero messages in the database despite having workspace artifacts (tool calls happened but messages weren't persisted) — check workspace files as fallback evidence.
-- Filesystem timestamps may not be reliable in sandboxed environments — use query timestamps as the authoritative source of recency, not filesystem mtime.
+- Some conversation tools require dependency skills to be loaded first. Always check prerequisites.
+- Some sessions have zero messages in the database despite having workspace artifacts (tool calls happened but messages weren’t persisted). Check workspace files as fallback evidence.
+- Filesystem timestamps may not be reliable in sandboxed environments. Use query timestamps as the authoritative source of recency, not filesystem mtime.
 
 ### When to Ask the User
 
-Never — this skill is designed to run autonomously (scheduled at 2 AM) and publish its findings. The user reviews the feed card at their convenience and can click action buttons to follow up.
+Never. This skill is designed to run autonomously (scheduled at 2 AM) and publish its findings. The user reviews the feed card at their convenience and can click action buttons to follow up.

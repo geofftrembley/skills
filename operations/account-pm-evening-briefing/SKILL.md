@@ -33,6 +33,7 @@ inputs:
     description: "Days to run (e.g., mon,tue,wed,thu,fri)"
     type: string
     default: "mon,tue,wed,thu,fri"
+tools: [slack_search, calendar_read, kg_read, memory_read, update_feed]
 ---
 
 # Account PM Evening Briefing
@@ -41,24 +42,24 @@ inputs:
 
 This skill creates a scheduled agent that acts as a virtual project manager for a named enterprise account. It monitors Slack channels and team member activity throughout the day, then delivers a concise, opinionated end-of-day briefing that highlights what moved forward, what stalled, and what needs attention tomorrow.
 
-The agent is designed for field sales leaders or solutions architects managing complex enterprise accounts with multiple parallel workstreams and distributed teams. It replaces the need to manually scan 4–6 Slack channels at the end of each day.
+The agent is designed for field sales leaders or solutions architects managing complex enterprise accounts with multiple parallel workstreams and distributed teams. It replaces the need to manually scan 4-6 Slack channels at the end of each day.
 
 ## Architecture
 
 This is implemented as a **scheduled agent** (not a one-shot skill) with the following characteristics:
 
 - **Schedule**: Runs once daily at end of business (configurable)
-- **Model**: `smart` — the briefing requires synthesis and judgment
+- **Model**: `smart`. The briefing requires synthesis and judgment
 - **Integrations**: Slack (read), Calendar (read), Knowledge Graph (read)
 - **Output**: Activity feed item with `importance="important"` (produces a toast notification)
-- **No condition/trigger**: Always runs on schedule — there's no cheap way to detect "something interesting happened" without doing the full analysis
+- **No condition/trigger**: Always runs on schedule. There’s no cheap way to detect "something interesting happened" without doing the full analysis
 
 ## Agent Prompt Template
 
 Below is the full agent prompt. Replace the placeholders with your account details.
 
 ```
-You are the {{customer_name}} Account Project Manager — evening edition. Your job is
+You are the {{customer_name}} Account Project Manager, evening edition. Your job is
 to monitor all {{customer_name}}-related Slack channels, track commitments, flag
 dropped balls, and deliver a concise, brutally honest end-of-day status briefing.
 
@@ -71,16 +72,16 @@ Search Slack for all {{customer_name}} activity from TODAY using these queries:
 4. "in:#{{channel_3}} after:yesterday"
 
 Also search for today's messages from key account team members:
-- from:@{{alias_1}} ({{Name}} — {{Role}})
-- from:@{{alias_2}} ({{Name}} — {{Role}})
-- from:@{{alias_3}} ({{Name}} — {{Role}})
+- from:@{{alias_1}} ({{Name}}, {{Role}})
+- from:@{{alias_2}} ({{Name}}, {{Role}})
+- from:@{{alias_3}} ({{Name}}, {{Role}})
 
 ## What to Track
 
 ### Active Workstreams:
-1. **{{Workstream 1}}** — Brief description. Revenue estimate.
-2. **{{Workstream 2}}** — Brief description. Revenue estimate.
-3. **{{Workstream 3}}** — Brief description. Revenue estimate.
+1. **{{Workstream 1}}**: Brief description. Revenue estimate.
+2. **{{Workstream 2}}**: Brief description. Revenue estimate.
+3. **{{Workstream 3}}**: Brief description. Revenue estimate.
 
 ### End-of-Day Focus:
 - What moved forward today vs. what was promised but didn't happen
@@ -92,14 +93,14 @@ Also search for today's messages from key account team members:
 
 Write in flowing paragraphs, not bullets. Be direct and critical. Structure as:
 
-**{{customer_name}} EOD Wrap-up — [Date]**
+**{{customer_name}} EOD Wrap-up, [Date]**
 
 Start with wins (if any) and then shift to what needs attention tomorrow. Flag any
 promises made today that you'll be tracking for follow-through. End with tomorrow's
 {{customer_name}}-related schedule if there are relevant meetings.
 
 Call update_feed with importance="important".
-Title: "{{customer_name}} EOD Wrap-up — [Date]".
+Title: "{{customer_name}} EOD Wrap-up, [Date]".
 ```
 
 ## Tool Policy
@@ -117,7 +118,7 @@ This grants **read-only** access to:
 - **Calendar**: View calendar events (to surface tomorrow's relevant meetings)
 - **Knowledge Graph**: Look up people, projects, and relationships for context
 
-No write tools are needed — the agent only reads and reports. `update_feed` and `skip_cycle` are auto-injected by the platform.
+No write tools are needed. The agent only reads and reports. `update_feed` and `skip_cycle` are auto-injected by the platform.
 
 ## Configuration
 
@@ -135,7 +136,7 @@ No write tools are needed — the agent only reads and reports. `update_feed` an
 
 ### Why These Choices
 
-**`smart` model**: The briefing requires reading 20–50 Slack messages, understanding context across workstreams, and making judgment calls about what matters. A lighter model would miss nuance.
+**`smart` model**: The briefing requires reading 20-50 Slack messages, understanding context across workstreams, and making judgment calls about what matters. A lighter model would miss nuance.
 
 **`use_memory: true`**: The agent benefits from knowing the user's priorities, relationships, and past context. It produces better briefings when it understands who matters and what the user cares about.
 
@@ -145,13 +146,13 @@ No write tools are needed — the agent only reads and reports. `update_feed` an
 
 ## Example Output
 
-> **Acme Corp EOD Wrap-up — June 10**
+> **Acme Corp EOD Wrap-up, June 10**
 >
-> The AI Platform RFP moved forward today. Sarah confirmed the technical review committee accepted our architecture proposal, and the next gate is commercial terms by Friday. That's genuine progress — first sign of momentum in two weeks.
+> The AI Platform RFP moved forward today. Sarah confirmed the technical review committee accepted our architecture proposal, and the next gate is commercial terms by Friday. That's genuine progress. First sign of momentum in two weeks.
 >
-> Less encouraging: the Contact Center workstream went completely silent again. Tom committed last Thursday to sending the deployment timeline by Monday. It's now Tuesday. No message, no update, no excuse. This is the third missed commitment on this workstream in two weeks — worth a direct ping tomorrow.
+> Less encouraging: the Contact Center workstream went completely silent again. Tom committed last Thursday to sending the deployment timeline by Monday. It's now Tuesday. No message, no update, no excuse. This is the third missed commitment on this workstream in two weeks. Worth a direct ping tomorrow.
 >
-> Tomorrow's schedule includes the 2pm executive review with their CTO. The pre-read was shared in #acme-strategy at 3:15pm today — you'll want to review the competitive positioning section, which references a new competitive proposal they received last week.
+> Tomorrow's schedule includes the 2pm executive review with their CTO. The pre-read was shared in #acme-strategy at 3:15pm today. You’ll want to review the competitive positioning section, which references a new competitive proposal they received last week.
 
 ## Lessons Learned
 
@@ -164,10 +165,10 @@ No write tools are needed — the agent only reads and reports. `update_feed` an
 
 ### Don't
 
-- **Don't assert negatives from absence of data.** "No Slack activity" ≠ "nothing happened." Work often occurs in customer-side tools (direct calls, their internal systems) that leave no Slack artifacts. Frame as: "No Slack activity observed — work may be occurring outside visible channels."
+- **Don't assert negatives from absence of data.** "No Slack activity" ≠ "nothing happened." Work often occurs in customer-side tools (direct calls, their internal systems) that leave no Slack artifacts. Frame as: "No Slack activity observed. Work may be occurring outside visible channels."
 - **Don't attribute blame or name individuals as having failed.** Report observable facts ("task last updated 5 days ago"), never infer negligence. The user can draw their own conclusions.
 - **Don't treat tool-level due dates as gospel** when the team updates weekly, not daily. Overdue flags in project management tools are noise if the team cadence is weekly.
-- **Don't use `importance="urgent"` for routine briefings.** Reserve urgent for genuine escalations. The evening briefing is always "important" — it should produce a toast but not feel like a fire alarm.
+- **Don't use `importance="urgent"` for routine briefings.** Reserve urgent for genuine escalations. The evening briefing is always "important". It should produce a toast but not feel like a fire alarm.
 
 ### Common Failures
 
@@ -179,7 +180,7 @@ No write tools are needed — the agent only reads and reports. `update_feed` an
 
 - When you're unsure whether a workstream is still active (it hasn't been mentioned in 2+ weeks)
 - When you detect a new channel or team member discussing the account that isn't in your monitoring scope
-- When the competitive landscape changes (new vendor mentioned that isn't in your tracking list)
+- When the competitive picture changes (new vendor mentioned that isn't in your tracking list)
 
 ## Pairing with a Morning Agent
 

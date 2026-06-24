@@ -56,7 +56,9 @@ A typical pass runs Book Architecture (structure), Author Interview (gather stor
 
 ## Operations
 
-Skills for running accounts and daily workflow.
+A closed-loop daily operating system for turning decisions into production reality. See the [operations README](./operations/README.md) for the full daily rhythm and the recommended next skills.
+
+- **[News Brief](./operations/news-brief/SKILL.md)**. Scans the web for what moved on your company, products, competitors, and category, then delivers a two-minute newsreel where every story carries its "so what." Runs on demand or scheduled before the morning brief.
 
 - **[Morning Brief](./operations/morning-brief/SKILL.md)**. Runs at 8 AM and delivers a focused start-of-day briefing: today's priority, overnight Slack activity that changes anything, and calendar readiness. The morning half of a daily bookend pattern.
 
@@ -94,6 +96,8 @@ skills/
 │   ├── sensitivity-read/SKILL.md
 │   └── manuscript-review/SKILL.md
 └── operations/
+    ├── README.md
+    ├── news-brief/SKILL.md
     ├── morning-brief/SKILL.md
     ├── account-pm-evening-briefing/SKILL.md
     ├── pre-meeting-prep/SKILL.md

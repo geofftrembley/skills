@@ -21,6 +21,7 @@ inputs:
     description: "Days to run (e.g., mon,tue,wed,thu,fri)"
     type: string
     default: "mon,tue,wed,thu,fri"
+tools: [slack_search, calendar_read, kg_read, memory_read, update_feed]
 ---
 
 # Morning Brief
@@ -34,7 +35,7 @@ It is the morning half of a daily bookend pattern. The [account-pm-evening-brief
 ## Architecture
 
 - **Schedule**: Runs at 8 AM on weekdays (configurable)
-- **Model**: `smart` — synthesizing overnight activity requires judgment
+- **Model**: `smart`. Synthesizing overnight activity requires judgment
 - **Integrations**: Slack (read), Calendar (read), Knowledge Graph (read)
 - **Output**: Activity feed item with `importance="important"`
 - **Memory**: Reads yesterday's evening briefing context when available
@@ -43,7 +44,7 @@ It is the morning half of a daily bookend pattern. The [account-pm-evening-brief
 
 ```
 You are the morning briefing agent. Your job is to tell me what to focus on 
-today — not everything that happened, but what actually matters for the next 
+today, not everything that happened, but what actually matters for the next 
 8 hours.
 
 ## Step 1: Check Yesterday's Carryover
@@ -77,7 +78,7 @@ Flag meetings where I appear unprepared based on available context.
 
 Write in 3 short sections. No bullets. Prose.
 
-**Morning Brief — [Date]**
+**Morning Brief, [Date]**
 
 **Today's Priority**: One sentence. The single most important thing to move 
 today, based on carryover and overnight activity.
@@ -89,7 +90,7 @@ nothing changed, say so in one sentence and move on.
 needs prep before it happens.
 
 Call update_feed with importance="important".
-Title: "Morning Brief — [Date]"
+Title: "Morning Brief, [Date]"
 ```
 
 ## Tool Policy
@@ -118,7 +119,7 @@ Title: "Morning Brief — [Date]"
 
 ### Why These Choices
 
-**Three sections, not five**: The evening briefing is comprehensive. The morning brief should be fast. One priority, one overnight scan, one calendar read. If you're still reading at 8:15, it's too long.
+**Three sections, not five**: The evening briefing is the full account. The morning brief should be fast. One priority, one overnight scan, one calendar read. If you're still reading at 8:15, it's too long.
 
 **Prose, not bullets**: Bullets encourage listing everything. Paragraphs force the agent to decide what's actually important. The goal is a brief, not a digest.
 
@@ -126,13 +127,13 @@ Title: "Morning Brief — [Date]"
 
 ## Example Output
 
-> **Morning Brief — June 11**
+> **Morning Brief, June 11**
 >
-> **Today's Priority**: The Acme Corp commercial terms review is due Friday and the account team hasn't aligned on the concessions floor — that conversation needs to happen before the 2pm call today.
+> **Today's Priority**: The Acme Corp commercial terms review is due Friday and the account team hasn't aligned on the concessions floor. That conversation needs to happen before the 2pm call today.
 >
 > **Overnight**: Sarah sent a note in #acme-strategy at 7:42pm flagging that the CTO wants to revisit the architecture decision from last week's review. No details yet. That's the live hand grenade going into today's meeting.
 >
-> **Calendar**: Three meetings today. The 9am pipeline review is fine — you were prepped yesterday. The 2pm Acme call is where the risk is; the pre-read hasn't been circulated and you have 90 minutes to fix that. The 4pm 1:1 is a working session and needs no prep.
+> **Calendar**: Three meetings today. The 9am pipeline review is fine. You were prepped yesterday. The 2pm Acme call is where the risk is; the pre-read hasn't been circulated and you have 90 minutes to fix that. The 4pm 1:1 is a working session and needs no prep.
 
 ## Bookend Pattern
 
@@ -148,16 +149,16 @@ The two skills share memory. The evening brief's carryover flags become the morn
 ### Do
 
 - **Lead with the priority, not the summary.** The most common mistake is opening with "here's everything that happened." Open with what to do first.
-- **Make silence explicit.** If nothing urgent happened overnight, say "quiet night — no change to active workstreams" rather than skipping the section. Absence of news is information.
-- **Flag unpreparedness directly.** If there's a meeting in 2 hours and context suggests you're not ready, say so with specifics. Not "you may want to review" — "the pre-read hasn't been sent and the meeting is at 2pm."
+- **Make silence explicit.** If nothing urgent happened overnight, say "quiet night, no change to active workstreams" rather than skipping the section. Absence of news is information.
+- **Flag unpreparedness directly.** If there's a meeting in 2 hours and context suggests you're not ready, say so with specifics. Not "you may want to review", but "the pre-read hasn't been sent and the meeting is at 2pm."
 
 ### Don't
 
 - **Don't recap the full evening briefing.** Memory includes it. Extract what's still relevant, leave the rest.
 - **Don't flag low-signal activity.** A Slack emoji reaction isn't news. Apply a materiality threshold: only surface what requires a response or changes a plan.
-- **Don't run on weekends.** Same logic as the evening briefing — enterprise accounts go quiet on weekends and a brief that says "nothing happening" trains the user to ignore the feed.
+- **Don't run on weekends.** Same logic as the evening briefing. Enterprise accounts go quiet on weekends and a brief that says "nothing happening" trains the user to ignore the feed.
 
 ### Common Failures
 
-- **No evening briefing in memory**: When the evening briefing didn't run the previous day (weekend, holiday, or failure), the morning brief loses its carryover context. Detect this and note it: "No carryover available — yesterday's briefing wasn't found."
+- **No evening briefing in memory**: When the evening briefing didn't run the previous day (weekend, holiday, or failure), the morning brief loses its carryover context. Detect this and note it: "No carryover available, yesterday's briefing wasn't found."
 - **Calendar access lag**: Calendar integrations occasionally have sync delays. If today's events look incomplete, flag it rather than presenting partial data as complete.
