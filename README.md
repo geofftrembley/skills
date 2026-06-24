@@ -8,7 +8,7 @@ Each skill is a prompt-based instruction set that extends an AI assistant's defa
 
 ## Thinking
 
-Skills for critical analysis, intellectual rigor, and structured decision-making.
+Skills for critical analysis, intellectual rigor, and structured decision-making. See the [thinking README](./thinking/README.md) for how the four work together, from default posture to stress-test to decision.
 
 - **[Cynical Geoff](./thinking/cynical-geoff/SKILL.md)**. A structured intellectual adversary. Steel-mans your argument, surfaces hidden assumptions, runs a pre-mortem, and delivers a brutally honest verdict. Activate when you want your idea genuinely stress-tested, not validated.
 
@@ -77,6 +77,7 @@ Each skill lives in its own folder with a single `SKILL.md` file:
 ```
 skills/
 ├── thinking/
+│   ├── README.md
 │   ├── cynical-geoff/SKILL.md
 │   ├── anti-sycophancy/SKILL.md
 │   ├── decision-brief/SKILL.md
